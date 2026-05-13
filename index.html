@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Голокова Софья — Системный аналитик</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    background: #f5f3ee;
+    color: #1a1a18;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 32px auto;
+    background: #fff;
+    padding: 52px 56px;
+    box-shadow: 0 2px 40px rgba(0,0,0,0.08);
+  }
+
+  /* ── Header ── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    padding-bottom: 26px;
+    border-bottom: 1.5px solid #1a1a18;
+    margin-bottom: 28px;
+  }
+
+  .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 1.08;
+    color: #1a1a18;
+  }
+
+  .title-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #4a6741;
+    border: 1px solid #4a6741;
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  .contacts {
+    text-align: right;
+    font-size: 12px;
+    color: #555;
+    line-height: 2;
+  }
+
+  .contacts a { color: #555; text-decoration: none; }
+  .contacts a:hover { color: #1a1a18; text-decoration: underline; }
+
+  /* ── Layout ── */
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 44px;
+  }
+
+  /* ── Section ── */
+  .section { margin-bottom: 26px; }
+
+  .section-title {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: #4a6741;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: #d0cfc8;
+  }
+
+  /* ── Experience item ── */
+  .exp-item { margin-bottom: 22px; }
+  .exp-item:last-child { margin-bottom: 0; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 1px;
+  }
+
+  .exp-role {
+    font-weight: 500;
+    font-size: 14px;
+    color: #1a1a18;
+  }
+
+  .exp-date {
+    font-size: 11px;
+    color: #999;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .exp-company {
+    font-size: 12px;
+    color: #4a6741;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .exp-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #888;
+    background: #f3f1ec;
+    border: 0.5px solid #d8d5ce;
+    padding: 1px 7px;
+    border-radius: 2px;
+    margin-left: 6px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exp-bullets li {
+    font-size: 12.5px;
+    color: #333;
+    padding-left: 13px;
+    position: relative;
+    margin-bottom: 5px;
+    line-height: 1.55;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #bbb;
+    font-size: 10px;
+    top: 2px;
+  }
+
+  .exp-bullets li strong {
+    color: #1a1a18;
+    font-weight: 500;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar .section-title::after { display: none; }
+
+  .skill-group { margin-bottom: 16px; }
+
+  .skill-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 6px;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .skill-tag {
+    font-size: 11.5px;
+    background: #f0ede6;
+    color: #3a3a38;
+    padding: 2px 8px;
+    border-radius: 2px;
+    border: 0.5px solid #d8d5ce;
+    line-height: 1.6;
+  }
+
+  .skill-tag.accent {
+    background: #eaf0e8;
+    border-color: #b8ccb5;
+    color: #2e4a2b;
+  }
+
+  /* ── Education ── */
+  .edu-item { margin-bottom: 14px; }
+
+  .edu-uni {
+    font-weight: 500;
+    font-size: 13px;
+    color: #1a1a18;
+  }
+
+  .edu-degree {
+    font-size: 12px;
+    color: #555;
+    margin-top: 2px;
+    line-height: 1.45;
+  }
+
+  .edu-date {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  /* ── Metric pills ── */
+  .metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .metric-pill {
+    background: #f0ede6;
+    border-left: 3px solid #4a6741;
+    padding: 8px 11px;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  .metric-pill strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1a18;
+    line-height: 1.2;
+    margin-bottom: 1px;
+  }
+
+  /* ── Course list ── */
+  .course-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .course-list li {
+    font-size: 11.5px;
+    color: #555;
+    padding-left: 10px;
+    position: relative;
+    margin-bottom: 5px;
+    line-height: 1.45;
+  }
+
+  .course-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: #4a6741;
+    font-size: 14px;
+    top: -1px;
+  }
+
+  .course-list li span {
+    font-size: 10.5px;
+    color: #aaa;
+    display: block;
+  }
+
+  /* ── Timeline connector ── */
+  .timeline {
+    position: relative;
+  }
+
+  .timeline .exp-item {
+    position: relative;
+    padding-left: 0;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; padding: 36px 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="name">Голокова<br>Софья</div>
+      <div class="title-tag">Системный аналитик</div>
+    </div>
+    <div class="contacts">
+      +7 (999) 060-18-02<br>
+      <a href="mailto:khobaess@mail.ru">khobaess@mail.ru</a><br>
+      <a href="https://github.com/khobaess" target="_blank">github.com/khobaess</a><br>
+      Москва
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- ── LEFT ── -->
+    <div class="main">
+
+      <!-- EXPERIENCE -->
+      <div class="section">
+        <div class="section-title">Опыт работы</div>
+
+        <!-- TT Trade Group -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Бизнес-ассистент</div>
+            <div class="exp-date">Дек 2025 — Апр 2026 · 5 мес.</div>
+          </div>
+          <div class="exp-company">ТТ Трейд Групп, ООО · Закуп IT-оборудования</div>
+          <ul class="exp-bullets">
+            <li><strong>Анализ рынка:</strong> вела сравнительный анализ цен и условий поставщиков IT-оборудования в Excel; формировала рекомендации по выбору лучших предложений</li>
+            <li><strong>Оптимизация процессов:</strong> выявила узкое место в ручном оформлении договоров; предложила схему автоматизации, согласовала логику с руководством</li>
+            <li><strong>Документооборот:</strong> оформляла инвойсы и сопроводительные документы; обеспечивала корректность данных по сделкам</li>
+            <li><strong>Подбор подрядчиков:</strong> разработала ТЗ и критерии оценки для найма видеомонтажёров и SMM-специалистов; провела отбор и интервью кандидатов</li>
+          </ul>
+        </div>
+
+        <!-- Altarix -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Бизнес-аналитик</div>
+            <div class="exp-date">Июн — Дек 2025 · 7 мес.</div>
+          </div>
+          <div class="exp-company">Альтарикс, ООО · Москва · Системная интеграция</div>
+          <ul class="exp-bullets">
+            <li><strong>Сбор и формализация требований:</strong> проводила интервью и кастдевы с заказчиками; фиксировала в user stories, acceptance criteria, бизнес-правилах и SRS; вела базы знаний в Confluence</li>
+            <li><strong>Управление задачами:</strong> декомпозировала и приоритизировала задачи в Jira; обеспечивала полноту требований для команды разработки</li>
+            <li><strong>Моделирование процессов:</strong> описывала AS-IS / TO-BE в нотациях BPMN 2.0 и UML (Use Case, Sequence, Activity); выявляла узкие места, согласовывала оптимизации с заказчиком</li>
+            <li><strong>Техническая документация:</strong> писала SRS и ТЗ, описывала CJM и требования к REST API-интеграциям в микросервисной архитектуре</li>
+            <li><strong>Кросс-командная работа:</strong> согласовывала решения с разработчиками, тестировщиками, менеджерами; вела реестр рисков; защищала решения перед руководством</li>
+            <li><strong>Мобильные продукты:</strong> определяла acceptance criteria для проектов с биометрическим доступом и видеоаналитикой; описывала сценарии под iOS и Android</li>
+          </ul>
+        </div>
+
+        <!-- VK internship -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Java-разработчик </div>
+            <div class="exp-date">Мар — Июн 2025 · 4 мес.</div>
+          </div>
+          <div class="exp-company">ВКонтакте (VK) · Москва</div>
+          <ul class="exp-bullets">
+            <li>Реализовала систему генерации резюме с OAuth 2.0 (VK API), геймификацией и аналитикой пользователей в production-среде (Spring Boot, Docker, Flyway, CI/CD)</li>
+            <li>Технический бэкграунд усиливает понимание архитектурных ограничений при работе с требованиями к API и микросервисам</li>
+          </ul>
+        </div>
+
+        <!-- Aisors -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Бизнес-аналитик</div>
+            <div class="exp-date">Сент — Дек 2024 · 4 мес.</div>
+          </div>
+          <div class="exp-company">Aisors</div>
+          <ul class="exp-bullets">
+            <li><strong>Требования:</strong> провела интервью с командами продаж и поддержки; зафиксировала в user stories и acceptance criteria</li>
+            <li><strong>Моделирование:</strong> описала AS-IS / TO-BE сценарии операторов и клиентов (BPMN 2.0); выявила узкие места в передаче диалога боту</li>
+            <li><strong>Анализ данных:</strong> проанализировала 200+ диалогов AI-ассистента; классифицировала ошибки логики; передала улучшения в SRS команде разработки</li>
+            <li><strong>KPI и приёмка:</strong> определила метрики ассистента (resolution rate, escalation rate, CSAT); согласовала критерии приёмки новых версий</li>
+            <li><strong>Отчётность:</strong> построила дашборд в Yandex DataLens; готовила еженедельные отчёты для стейкхолдеров</li>
+          </ul>
+        </div>
+
+        <!-- GitFlic -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Аналитик </div>
+            <div class="exp-date">Июнь — Авг 2024 · 3 мес.</div>
+          </div>
+          <div class="exp-company">GitFlic (ООО «РеСолют») · Москва · Российская платформа для хранения и управления кодом</div>
+          <ul class="exp-bullets">
+            <li><strong>Изучение продукта:</strong> исследовала функциональность платформы (репозитории, merge requests, CI/CD, управление командами); разобралась в пользовательских сценариях и бизнес-логике сервиса</li>
+            <li><strong>Работа с требованиями:</strong> участвовала в сборе и документировании требований к новым функциям; оформляла задачи и описания в системе управления проектами</li>
+            <li><strong>Анализ пользовательских сценариев:</strong> описывала use case'ы для ключевых пользовательских потоков; участвовала в выявлении несоответствий между требованиями и реализацией</li>
+            <li><strong>Командная работа:</strong> взаимодействовала с командой разработки, участвовала во встречах и обсуждении задач; получила первый опыт работы в IT-продуктовой команде</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- VKR PROJECT -->
+      <div class="section">
+        <div class="section-title">Ключевой проект (ВКР)</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Микросервисная система интеллектуальной генерации резюме</div>
+            <div class="exp-date">2025 — 2026</div>
+          </div>
+          <div class="exp-company">МИСИС · Дипломная работа · NLP + микросервисы</div>
+          <ul class="exp-bullets">
+            <li>Полный аналитический цикл: исследование предметной области, AS-IS / TO-BE, сравнительный анализ 7 конкурирующих решений (ATS, портфолио, конструкторы резюме)</li>
+            <li>Разработала функциональные и нефункциональные требования; спроектировала архитектуру (IDEF0, UML: Use Case, Activity, Sequence, Component, Deployment; ADR)</li>
+            <li>Формализовала математическую модель семантического ранжирования (Sentence-Transformers + косинусное сходство); провела экспериментальную валидацию</li>
+            <li><strong>Результат:</strong> −91% времени на составление резюме (75→8 мин), +81% релевантных достижений; ρ Спирмена = 0,81; Precision@3 = 0,93; оценка экспертов 4,50/5,00</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PET PROJECTS -->
+      <div class="section">
+        <div class="section-title">Пет-проекты</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Счётчик калорий — продуктовый и аналитический цикл</div>
+            <div class="exp-date">Янв — Май 2025</div>
+          </div>
+          <div class="exp-company">Пет-проект · соло · Spring, PostgreSQL, Docker</div>
+          <ul class="exp-bullets">
+            <li><strong>Конкурентный анализ:</strong> исследовала существующие решения (FatSecret, MyFitnessPal, Lifesum); выявила незакрытые потребности аудитории, сформулировала дифференциаторы продукта</li>
+            <li><strong>Требования:</strong> составила ТЗ; описала функциональные и нефункциональные требования; декомпозировала на user stories с acceptance criteria для всех сущностей</li>
+            <li><strong>Проектирование:</strong> спроектировала доменную модель и реляционную БД; описала REST API — эндпоинты, структуры запросов и ответов</li>
+            <li><strong>Реализация:</strong> самостоятельно разработала бэкенд и прошла полный цикл от идеи до работающего продукта — позволяет оценивать техническую реализуемость требований</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Интернет-витрина напитков — от концепции до реализации</div>
+            <div class="exp-date">Сент — Дек 2024</div>
+          </div>
+          <div class="exp-company">Пет-проект · соло · Spring, PostgreSQL, Thymeleaf</div>
+          <ul class="exp-bullets">
+            <li><strong>Анализ рынка:</strong> изучила конкурентов в нише онлайн-витрин; определила целевую аудиторию, ключевые сценарии использования и приоритеты функциональности</li>
+            <li><strong>Постановка задачи:</strong> написала ТЗ с описанием сущностей, бизнес-правил и пользовательских сценариев; сформулировала требования к каталогу, фильтрации, управлению категориями</li>
+            <li><strong>Проектирование:</strong> спроектировала БД из 6 сущностей; описала 30+ REST-эндпоинтов с правилами валидации и бизнес-логикой</li>
+            <li><strong>Реализация:</strong> разработала сервисный слой и server-side рендеринг — технический опыт усиливает качество аналитических решений</li>
+          </ul>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- ── RIGHT (SIDEBAR) ── -->
+    <div class="sidebar">
+
+      <div class="section">
+        <div class="section-title">Образование</div>
+        <div class="edu-item">
+          <div class="edu-uni">НИТУ МИСИС</div>
+          <div class="edu-degree">Бакалавр · Системная и программная инженерия</div>
+          <div class="edu-date">2022 – 2026</div>
+        </div>
+        <div class="edu-item" style="margin-top:8px;">
+          <div class="edu-uni">Школа 21</div>
+          <div class="edu-degree">Проектное обучение — аналитика и командная разработка</div>
+          <div class="edu-date">2024</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Навыки</div>
+
+        <div class="skill-group">
+          <div class="skill-label">Анализ и требования</div>
+          <div class="skill-list">
+            <span class="skill-tag accent">User Stories</span>
+            <span class="skill-tag accent">Acceptance Criteria</span>
+            <span class="skill-tag accent">SRS / ТЗ</span>
+            <span class="skill-tag accent">CJM</span>
+            <span class="skill-tag accent">AS-IS / TO-BE</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Моделирование</div>
+          <div class="skill-list">
+            <span class="skill-tag accent">BPMN 2.0</span>
+            <span class="skill-tag accent">UML</span>
+            <span class="skill-tag accent">IDEF0</span>
+            <span class="skill-tag accent">ER-диаграммы</span>
+            <span class="skill-tag accent">REST API</span>
+            <span class="skill-tag accent">OpenAPI/Swagger</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Инструменты</div>
+          <div class="skill-list">
+            <span class="skill-tag">Jira</span>
+            <span class="skill-tag">Confluence</span>
+            <span class="skill-tag">Yandex DataLens</span>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Docker</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Данные</div>
+          <div class="skill-list">
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Python / pandas</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Разработка</div>
+          <div class="skill-list">
+            <span class="skill-tag">Java · Spring Boot</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">React / TypeScript</span>
+            <span class="skill-tag">JWT · OAuth 2.0</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Процессы</div>
+          <div class="skill-list">
+            <span class="skill-tag">Scrum</span>
+            <span class="skill-tag">Kanban</span>
+            <span class="skill-tag">Риск-менеджмент</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Метрики проектов</div>
+        <div class="metrics">
+          <div class="metric-pill">
+            <strong>−91%</strong>
+            время составления резюме
+          </div>
+          <div class="metric-pill">
+            <strong>200+ диалогов</strong>
+            проанализировано в Aisors
+          </div>
+          <div class="metric-pill">
+            <strong>ρ = 0,81 · P@3 = 0,93</strong>
+            качество NLP-ранжирования
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="margin-top: 4px;">
+        <div class="section-title">Курсы и сертификаты</div>
+        <ul class="course-list">
+          <li>Продакт-менеджмент <span>VK Education · 2026 · 42/46 баллов</span></li>
+          <li>Алгоритмы и структуры данных <span>VK Education · поиск, сортировка, деревья, хеширование</span></li>
+          <li>BPMN 2.0 — события, шлюзы, пулы <span>Stepik</span></li>
+          <li>Бизнес-аналитик: моделирование процессов <span>VK Education</span></li>
+          <li>Управление IT-проектами: Agile, Scrum, риски <span>VK Education</span></li>
+          <li>Продуктовые метрики и Yandex DataLens <span>Stepik</span></li>
+          <li>SQL <span>Karpov.Courses</span></li>
+          <li>Python, pandas, DataLens <span>Stepik</span></li>
+          <li>Spring Boot · Hibernate · Security · REST <span>Наиль Алишев</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
